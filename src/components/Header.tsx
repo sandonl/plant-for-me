@@ -6,7 +6,7 @@ const Header = ({}: HeaderProps) => {
   // NextAuth logic goes here to render appropriate header elements
 
   return (
-    <header className="sticky top-0 z-40 box-border w-full border-b border-b-slate-200">
+    <header className="sticky top-0 z-40 box-border w-full border-b border-b-slate-200 bg-slate-100">
       <div className="mx-auto max-w-7xl">
         <div className="flex h-16 items-center justify-between space-x-1">
           <Link href={"/"}>

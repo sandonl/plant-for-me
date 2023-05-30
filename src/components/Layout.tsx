@@ -8,10 +8,10 @@ interface LayoutProps {
 }
 
 const Layout = ({ children, pageTitle }: LayoutProps) => {
-  const title = `${pageTitle} | Plant4Me`;
+  const title = `${pageTitle} | Planter`;
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-slate-100">
       <Head>
         <title>{title}</title>
       </Head>

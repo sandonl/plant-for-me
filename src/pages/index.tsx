@@ -23,8 +23,8 @@ const Home: NextPage = () => {
             <div className="p-2" />
             <h3 className="text-center text-xl font-bold text-slate-900">
               A central dashboard that helps you track the health of your
-              plants, when to water them, and note any additional information to
-              help maintain them
+              plants, when to water them, and keep track of information to help
+              them stay healthy
             </h3>
           </main>
         </div>
