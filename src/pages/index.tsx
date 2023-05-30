@@ -9,11 +9,25 @@ const Home: NextPage = () => {
   return (
     <>
       <Layout pageTitle={"Home"}>
-        <main className="flex h-[calc(100vh-4rem)] flex-col items-center justify-center">
-          <h1 className="font-semibold text-slate-900 sm:text-sm lg:text-5xl">
-            🌱 Plant For Me
-          </h1>
-        </main>
+        <div className="mx-auto max-w-5xl">
+          <main className="flex h-[calc(100vh-4rem)] flex-col items-center justify-center">
+            <h1 className="text-6xl font-bold text-slate-900">
+              🌱 Plant<span className="text-green-300">er</span>
+            </h1>
+            <div className="p-4" />
+            <h2 className="text-3xl font-bold text-slate-900">
+              Organise, Manage and Maintain Your Plants
+            </h2>
+            <div className="p-2" />
+            <div className="w-11/12 border-b border-b-slate-200" />
+            <div className="p-2" />
+            <h3 className="text-center text-xl font-bold text-slate-900">
+              A central dashboard that helps you track the health of your
+              plants, when to water them, and note any additional information to
+              help maintain them
+            </h3>
+          </main>
+        </div>
       </Layout>
       {/* <Head>
         <title>Create T3 App</title>

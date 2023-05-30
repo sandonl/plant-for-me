@@ -8,13 +8,15 @@ interface LayoutProps {
 }
 
 const Layout = ({ children, pageTitle }: LayoutProps) => {
+  const title = `${pageTitle} | Plant4Me`;
+
   return (
     <div className="flex min-h-screen flex-col">
       <Head>
-        <title> {pageTitle} </title>
+        <title>{title}</title>
       </Head>
       <Header />
-      {children}
+      <div className="mx-auto max-w-7xl">{children}</div>
     </div>
   );
 };
