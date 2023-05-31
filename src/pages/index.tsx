@@ -1,7 +1,10 @@
 import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
-import Layout from "~/components/Layout";
-import { api } from "~/utils/api";
+import Layout from "../components/Layout";
+
+// import { api } from "~/utils/api";
+import { api } from "@/src/utils/api";
+import { Button } from "../components/ui/button";
 
 const Home: NextPage = () => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -26,6 +29,8 @@ const Home: NextPage = () => {
               plants, when to water them, and keep track of information to help
               them stay healthy
             </h3>
+            <div className="p-2" />
+            <Button className="px-10 py-6 text-xl"> Get Started </Button>
           </main>
         </div>
       </Layout>

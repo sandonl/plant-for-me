@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Button } from "./ui/button";
 
 interface HeaderProps {}
 
@@ -20,11 +21,9 @@ const Header = ({}: HeaderProps) => {
                 Dashboard
               </h2>
             </Link> */}
-            <Link href={"/"}>
-              <h2 className="text-md font-semibold hover:text-slate-600">
-                About
-              </h2>
-            </Link>
+            <Button asChild>
+              <Link href="/login">Login</Link>
+            </Button>
           </div>
         </div>
       </div>
