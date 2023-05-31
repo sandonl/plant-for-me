@@ -30,7 +30,12 @@ const Home: NextPage = () => {
               them stay healthy
             </h3>
             <div className="p-2" />
-            <Button className="px-10 py-6 text-xl"> Get Started </Button>
+            <Button
+              className="px-10 py-6 text-xl"
+              onClick={() => void signIn()}
+            >
+              Get Started
+            </Button>
           </main>
         </div>
       </Layout>
