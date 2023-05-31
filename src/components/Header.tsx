@@ -1,14 +1,11 @@
+import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { api } from "../utils/api";
 
 interface HeaderProps {}
 
 const Header = ({}: HeaderProps) => {
-  // NextAuth logic goes here to render appropriate header elements
-
-  const { data: sessionData } = useSession();
+  const { status } = useSession();
 
   return (
     <header className="sticky top-0 z-40 box-border w-full border-b border-b-slate-200 bg-slate-100">
@@ -20,19 +17,15 @@ const Header = ({}: HeaderProps) => {
             </h2>
           </Link>
           <div className="flex items-center space-x-5">
-            {/* <Link href={"/"}>
-              <h2 className="text-md font-semibold hover:text-slate-600">
-                Dashboard
-              </h2>
-            </Link> */}
-            {sessionData ? (
+            {status === "authenticated" && (
               <>
                 <Button asChild variant="secondary">
                   <Link href="/dashboard">Dashboard</Link>
                 </Button>
                 <Button onClick={() => void signOut()}>Logout</Button>
               </>
-            ) : (
+            )}
+            {status === "unauthenticated" && (
               <Button onClick={() => void signIn()}>Login</Button>
             )}
           </div>

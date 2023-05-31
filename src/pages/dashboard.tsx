@@ -1,19 +1,23 @@
-import { signIn, signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { NextPage } from "next";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import Layout from "../components/Layout";
-import { api } from "../utils/api";
-import { redirect } from "next/dist/server/api-utils";
 
 interface dashboardProps {}
 
-const Dashboard = ({}: dashboardProps) => {
-  // Add return to the homepage if no session exists
+interface PlantData {
+  name: string;
+  subtitle: string;
+  water: number;
+}
 
-  const { data: session, status } = useSession();
-
-  if (!session) {
-    return <> Unauthorised </>;
-  }
+const Dashboard: NextPage = ({}: dashboardProps) => {
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect("/");
+    },
+  });
 
   return (
     <>
