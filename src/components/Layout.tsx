@@ -16,7 +16,7 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
         <title>{title}</title>
       </Head>
       <Header />
-      <div className="mx-auto max-w-7xl">{children}</div>
+      {children}
     </div>
   );
 };
