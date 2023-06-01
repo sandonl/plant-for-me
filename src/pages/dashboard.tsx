@@ -1,8 +1,9 @@
 import { NextPage } from "next";
-import { useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Layout from "../components/Layout";
 import PlantCard from "../components/PlantCard";
+import { Session } from "next-auth";
 
 interface dashboardProps {}
 
@@ -12,12 +13,9 @@ interface PlantData {
   water: number;
 }
 
-const Dashboard: NextPage = ({}: dashboardProps) => {
+const Dashboard = ({}: dashboardProps) => {
   const { data: session, status } = useSession({
     required: true,
-    onUnauthenticated() {
-      redirect("/");
-    },
   });
 
   return (
@@ -42,3 +40,20 @@ const Dashboard: NextPage = ({}: dashboardProps) => {
   );
 };
 export default Dashboard;
+
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
+}

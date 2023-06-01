@@ -5,7 +5,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/src/components/card";
+} from "@/src/components/ui/card";
 
 interface PlantCardProps {}
 

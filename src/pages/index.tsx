@@ -12,31 +12,33 @@ const Home: NextPage = () => {
   return (
     <>
       <Layout pageTitle={"Home"}>
-        <div className="mx-auto max-w-5xl">
-          <main className="flex h-[calc(100vh-4rem)] flex-col items-center justify-center">
-            <h1 className="text-6xl font-bold text-slate-900">
-              🌱 Plant<span className="text-green-300">er</span>
-            </h1>
-            <div className="p-4" />
-            <h2 className="text-3xl font-bold text-slate-900">
-              Organise, Manage and Maintain Your Plants
-            </h2>
-            <div className="p-2" />
-            <div className="w-11/12 border-b border-b-slate-200" />
-            <div className="p-2" />
-            <h3 className="text-center text-xl font-bold text-slate-900">
-              A central dashboard that helps you track the health of your
-              plants, when to water them, and keep track of information to help
-              them stay healthy
-            </h3>
-            <div className="p-2" />
-            <Button
-              className="px-10 py-6 text-xl"
-              onClick={() => void signIn()}
-            >
-              Get Started
-            </Button>
-          </main>
+        <div className="bg-gradient-to-r from-slate-100 to-green-100">
+          <div className="mx-auto max-w-5xl">
+            <main className="flex h-[calc(100vh-4rem)] flex-col items-center justify-center">
+              <h1 className="text-6xl font-bold text-slate-900">
+                🌱 Plant<span className="text-green-300">er</span>
+              </h1>
+              <div className="p-4" />
+              <h2 className="text-3xl font-bold text-slate-900">
+                Organise, Manage and Maintain Your Plants
+              </h2>
+              <div className="p-2" />
+              <div className="w-11/12 border-b border-b-slate-200" />
+              <div className="p-2" />
+              <h3 className="text-center text-xl font-bold text-slate-900">
+                A central dashboard that helps you track the health of your
+                plants, when to water them, and keep track of information to
+                help them stay healthy
+              </h3>
+              <div className="p-2" />
+              <Button
+                className="px-10 py-6 text-xl"
+                onClick={() => void signIn()}
+              >
+                Get Started
+              </Button>
+            </main>
+          </div>
         </div>
       </Layout>
       {/* <Head>

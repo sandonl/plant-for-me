@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { ReactNode } from "react";
 import Header from "./Header";
+import Footer from "./Footer";
 
 interface LayoutProps {
   children: ReactNode;
@@ -17,6 +18,7 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
       </Head>
       <Header />
       {children}
+      <Footer />
     </div>
   );
 };
