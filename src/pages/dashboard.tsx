@@ -11,7 +11,7 @@ const fakeData = [
   {
     name: "White Edge",
     plantName: "Dieffenbachia White Edge",
-    water: 5,
+    water: 3,
   },
   {
     name: "Watermelon Plant",
@@ -21,7 +21,7 @@ const fakeData = [
   {
     name: "Milky Way",
     plantName: "Dieffenbachia Milky Way ",
-    water: 5,
+    water: 9,
   },
 ];
 
@@ -40,7 +40,7 @@ const Dashboard = ({}: dashboardProps) => {
           <h2 className="mb-5 text-center font-semibold">
             These are your current plants:
           </h2>
-          <div className="mx-auto w-full max-w-4xl">
+          <div className="mx-auto w-96 max-w-4xl md:w-full">
             {fakeData.map((plant, id) => (
               <PlantCard plant={plant} key={id} />
             ))}
