@@ -18,7 +18,6 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
       </Head>
       <Header />
       {children}
-      <Footer />
     </div>
   );
 };

@@ -7,14 +7,26 @@ import { Session } from "next-auth";
 
 interface dashboardProps {}
 
-interface PlantData {
-  name: string;
-  subtitle: string;
-  water: number;
-}
+const fakeData = [
+  {
+    name: "White Edge",
+    plantName: "Dieffenbachia White Edge",
+    water: 5,
+  },
+  {
+    name: "Watermelon Plant",
+    plantName: "Aglaonema 'Favonian'",
+    water: 5,
+  },
+  {
+    name: "Milky Way",
+    plantName: "Dieffenbachia Milky Way ",
+    water: 5,
+  },
+];
 
 const Dashboard = ({}: dashboardProps) => {
-  const { data: session, status } = useSession({
+  const { data: session } = useSession({
     required: true,
   });
 
@@ -29,10 +41,9 @@ const Dashboard = ({}: dashboardProps) => {
             These are your current plants:
           </h2>
           <div className="mx-auto w-full max-w-4xl">
-            <PlantCard />
-            <PlantCard />
-            <PlantCard />
-            <PlantCard />
+            {fakeData.map((plant, id) => (
+              <PlantCard plant={plant} key={id} />
+            ))}
           </div>
         </div>
       </Layout>

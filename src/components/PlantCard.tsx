@@ -7,16 +7,27 @@ import {
   CardTitle,
 } from "@/src/components/ui/card";
 
-interface PlantCardProps {}
+interface PlantCardProps {
+  plant: {
+    name: string;
+    plantName: string;
+    water: number;
+  };
+}
 
-const PlantCard = ({}: PlantCardProps) => {
+const PlantCard = (props: PlantCardProps) => {
+  const { name, plantName, water } = props.plant;
+
   return (
     <Card className="mb-2">
       <CardHeader>
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>Card Description</CardDescription>
+        <CardTitle>{name}</CardTitle>
+        <CardDescription>{plantName}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex space-x-3">
+        <>
+          <p> Current water level: </p>
+        </>
         <p>Card Content</p>
       </CardContent>
     </Card>
