@@ -33,7 +33,9 @@ const Home: NextPage = () => {
               <div className="p-2" />
               <Button
                 className="px-10 py-6 text-xl"
-                onClick={() => void signIn()}
+                onClick={() =>
+                  void signIn("discord", { callbackUrl: "/dashboard" })
+                }
               >
                 Get Started
               </Button>

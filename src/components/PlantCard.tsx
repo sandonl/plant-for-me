@@ -9,9 +9,12 @@ import {
 import { useEffect, useState } from "react";
 
 import { Progress } from "@/src/components/ui/progress";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface PlantCardProps {
   plant: {
+    id: string;
     name: string;
     plantName: string;
     water: number;
@@ -19,7 +22,8 @@ interface PlantCardProps {
 }
 
 const PlantCard = (props: PlantCardProps) => {
-  const { name, plantName, water } = props.plant;
+  const router = useRouter();
+  const { name, plantName, water, id } = props.plant;
 
   const [progress, setProgress] = useState(water);
 
@@ -29,18 +33,22 @@ const PlantCard = (props: PlantCardProps) => {
   }, []);
 
   return (
-    <Card className="mb-2">
-      <CardHeader>
-        <CardTitle>{name}</CardTitle>
-        <CardDescription>{plantName}</CardDescription>
-      </CardHeader>
-      <CardContent className="flex items-center justify-between">
-        <>
-          <p className="text-sm font-bold"> Requires water: </p>
-          <Progress value={progress} className="w-1/2 bg-slate-200" />
-        </>
-      </CardContent>
-    </Card>
+    <Link
+      href={{ pathname: `plants/${id}`, query: { name, plantName, water } }}
+    >
+      <Card className="mb-2 cursor-pointer">
+        <CardHeader>
+          <CardTitle>{name}</CardTitle>
+          <CardDescription>{plantName}</CardDescription>
+        </CardHeader>
+        <CardContent className="flex items-center justify-between">
+          <>
+            <p className="text-sm font-bold"> Requires water: </p>
+            <Progress value={progress} className="w-1/2 bg-slate-200" />
+          </>
+        </CardContent>
+      </Card>
+    </Link>
   );
 };
 export default PlantCard;

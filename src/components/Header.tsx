@@ -26,7 +26,13 @@ const Header = ({}: HeaderProps) => {
               </>
             )}
             {status === "unauthenticated" && (
-              <Button onClick={() => void signIn()}>Login</Button>
+              <Button
+                onClick={() =>
+                  void signIn("discord", { callbackUrl: "/dashboard" })
+                }
+              >
+                Login
+              </Button>
             )}
           </div>
         </div>

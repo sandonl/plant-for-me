@@ -4,21 +4,25 @@ import { redirect } from "next/navigation";
 import Layout from "../components/Layout";
 import PlantCard from "../components/PlantCard";
 import { Session } from "next-auth";
+import { useRouter } from "next/router";
 
 interface dashboardProps {}
 
 const fakeData = [
   {
+    id: "23213131",
     name: "White Edge",
     plantName: "Dieffenbachia White Edge",
     water: 3,
   },
   {
+    id: "212321311",
     name: "Watermelon Plant",
     plantName: "Aglaonema 'Favonian'",
     water: 5,
   },
   {
+    id: "2321313as13131",
     name: "Milky Way",
     plantName: "Dieffenbachia Milky Way ",
     water: 9,
@@ -29,6 +33,8 @@ const Dashboard = ({}: dashboardProps) => {
   const { data: session } = useSession({
     required: true,
   });
+
+  const router = useRouter();
 
   return (
     <>
