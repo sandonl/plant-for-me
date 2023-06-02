@@ -5,6 +5,8 @@ import Layout from "../components/Layout";
 import PlantCard from "../components/PlantCard";
 import { Session } from "next-auth";
 import { useRouter } from "next/router";
+import { Button } from "../components/ui/button";
+import Link from "next/link";
 
 interface dashboardProps {}
 
@@ -34,8 +36,6 @@ const Dashboard = ({}: dashboardProps) => {
     required: true,
   });
 
-  const router = useRouter();
-
   return (
     <>
       <Layout pageTitle="Dashboard">
@@ -43,6 +43,7 @@ const Dashboard = ({}: dashboardProps) => {
           <h1 className="my-3 text-center text-sm font-bold md:text-2xl">
             Welcome {session?.user.name}!
           </h1>
+
           <h2 className="mb-5 text-center font-semibold">
             These are your current plants:
           </h2>
@@ -50,6 +51,11 @@ const Dashboard = ({}: dashboardProps) => {
             {fakeData.map((plant, id) => (
               <PlantCard plant={plant} key={id} />
             ))}
+            <div className="flex justify-end py-2">
+              <Button asChild>
+                <Link href="/addplant">Add plant</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </Layout>

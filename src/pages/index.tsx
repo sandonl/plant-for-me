@@ -1,13 +1,16 @@
 import { type NextPage } from "next";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Layout from "../components/Layout";
 
 // import { api } from "~/utils/api";
 import Footer from "../components/Footer";
 import { Button } from "../components/ui/button";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
+
+  const { status } = useSession();
 
   return (
     <>
@@ -31,14 +34,21 @@ const Home: NextPage = () => {
                 help them stay healthy
               </h3>
               <div className="p-2" />
-              <Button
-                className="px-10 py-6 text-xl"
-                onClick={() =>
-                  void signIn("discord", { callbackUrl: "/dashboard" })
-                }
-              >
-                Get Started
-              </Button>
+
+              {status === "authenticated" ? (
+                <Button className="px-10 py-6 text-xl" asChild>
+                  <Link href="/dashboard"> Go to Dashboard </Link>
+                </Button>
+              ) : (
+                <Button
+                  className="px-10 py-6 text-xl"
+                  onClick={() =>
+                    void signIn("discord", { callbackUrl: "/dashboard" })
+                  }
+                >
+                  Get Started
+                </Button>
+              )}
             </main>
           </div>
         </div>
