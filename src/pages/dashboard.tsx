@@ -1,12 +1,8 @@
-import { NextPage } from "next";
 import { getSession, useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import Link from "next/link";
 import Layout from "../components/Layout";
 import PlantCard from "../components/PlantCard";
-import { Session } from "next-auth";
-import { useRouter } from "next/router";
 import { Button } from "../components/ui/button";
-import Link from "next/link";
 
 interface dashboardProps {}
 

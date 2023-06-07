@@ -21,6 +21,7 @@ model Plant {
     name      String
     plantName String
     water     Int
+    notes     String
 }
 
 // Necessary for Next auth

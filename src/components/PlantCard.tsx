@@ -9,7 +9,6 @@ import {
 import { useEffect, useState } from "react";
 
 import { Progress } from "@/src/components/ui/progress";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 interface PlantCardProps {
@@ -22,7 +21,6 @@ interface PlantCardProps {
 }
 
 const PlantCard = (props: PlantCardProps) => {
-  const router = useRouter();
   const { name, plantName, water, id } = props.plant;
 
   const [progress, setProgress] = useState(water);
