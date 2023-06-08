@@ -19,7 +19,7 @@ import { Textarea } from "./ui/textarea";
 const formSchema = z.object({
   name: z.string().min(2).max(50),
   plantName: z.string().min(2).max(50),
-  water: z.number(),
+  water: z.coerce.number(),
   notes: z.string().min(2),
 });
 
@@ -27,6 +27,12 @@ export function AddPlantForm() {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      plantName: "",
+      water: 7,
+      notes: "",
+    },
   });
 
   // 2. Define a submit handler.
@@ -71,13 +77,12 @@ export function AddPlantForm() {
             </FormItem>
           )}
         />
-        {/* TODO: Fix number validation */}
         <FormField
           control={form.control}
           name="water"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Water (days)</FormLabel>
+              <FormLabel>Water (Every X days)</FormLabel>
               <FormControl>
                 <Input type="number" placeholder="7" {...field} />
               </FormControl>
@@ -95,7 +100,7 @@ export function AddPlantForm() {
             <FormItem>
               <FormLabel>Notes</FormLabel>
               <FormControl>
-                <Textarea placeholder="Plant Name" {...field} />
+                <Textarea placeholder="Soon to be root bound" {...field} />
               </FormControl>
               <FormDescription>
                 Any additional information about your plant
