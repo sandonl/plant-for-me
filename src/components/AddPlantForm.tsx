@@ -15,6 +15,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Textarea } from "./ui/textarea";
+import Link from "next/link";
+import { MoveLeft } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -109,7 +111,14 @@ export function AddPlantForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <div className="flex justify-between">
+          <Button asChild variant="ghost">
+            <Link href={"/dashboard"}>
+              <MoveLeft />
+            </Link>
+          </Button>
+          <Button type="submit">Submit</Button>
+        </div>
       </form>
     </Form>
   );
