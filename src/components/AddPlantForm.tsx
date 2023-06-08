@@ -17,6 +17,9 @@ import * as z from "zod";
 import { Textarea } from "./ui/textarea";
 import Link from "next/link";
 import { MoveLeft } from "lucide-react";
+import { v4 as uuid } from "uuid";
+import { api } from "../utils/api";
+import { useSession } from "next-auth/react";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -25,8 +28,12 @@ const formSchema = z.object({
   notes: z.string().min(2),
 });
 
-export function AddPlantForm() {
-  // 1. Define your form.
+// This should be a protected route and userId passed as a prop
+const AddPlantForm = () => {
+  const { data } = useSession();
+  const addPlant = api.plant.addPlant.useMutation();
+  const userId = data?.user.id!;
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,11 +44,14 @@ export function AddPlantForm() {
     },
   });
 
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    const id = uuid();
+    const { name, plantName, water, notes } = values;
     console.log(values);
+
+    addPlant.mutate({ id, userId, name, plantName, water, notes });
   }
 
   return (
@@ -70,7 +80,7 @@ export function AddPlantForm() {
             <FormItem>
               <FormLabel>Scientific Name</FormLabel>
               <FormControl>
-                <Input placeholder="Plant Name" {...field} />
+                <Input placeholder="Scientific Plant Name" {...field} />
               </FormControl>
               <FormDescription>
                 This is the scientific plant name.
@@ -122,4 +132,6 @@ export function AddPlantForm() {
       </form>
     </Form>
   );
-}
+};
+
+export default AddPlantForm;

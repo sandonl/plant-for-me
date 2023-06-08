@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
 import Layout from "../components/Layout";
-import { AddPlantForm } from "../components/AddPlantForm";
+import AddPlantForm from "../components/AddPlantForm";
 
 interface addplantProps {}
 
