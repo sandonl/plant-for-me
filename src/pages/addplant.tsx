@@ -10,7 +10,7 @@ const addplant = ({}: addplantProps) => {
       <div className="mx-auto max-w-4xl py-5 md:w-full">
         <h1 className="py-3 text-3xl font-bold"> Add a New Plant </h1>
         <p className=" text-sm">Enter details of your new plant</p>
-        <div className="my-3 border-b border-slate-300"></div>
+        <div className="my-3 border-b border-slate-200" />
         <AddPlantForm />
       </div>
     </Layout>

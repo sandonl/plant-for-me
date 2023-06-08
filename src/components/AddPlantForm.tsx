@@ -112,7 +112,7 @@ export function AddPlantForm() {
           )}
         />
         <div className="flex justify-between">
-          <Button asChild variant="ghost">
+          <Button asChild variant="outline">
             <Link href={"/dashboard"}>
               <MoveLeft />
             </Link>

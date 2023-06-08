@@ -49,7 +49,7 @@ const Dashboard = ({}: dashboardProps) => {
             ))}
             <div className="flex justify-end py-2">
               <Button asChild>
-                <Link href="/addplant">Add plant</Link>
+                <Link href="/addplant">Add Plant</Link>
               </Button>
             </div>
           </div>

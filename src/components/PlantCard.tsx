@@ -39,12 +39,13 @@ const PlantCard = (props: PlantCardProps) => {
           <CardTitle>{name}</CardTitle>
           <CardDescription>{plantName}</CardDescription>
         </CardHeader>
-        <CardContent className="flex items-center justify-between">
+        {/* TODO: Readd */}
+        {/* <CardContent className="flex items-center justify-between">
           <>
             <p className="text-sm font-bold"> Requires water: </p>
             <Progress value={progress} className="w-1/2 bg-slate-200" />
           </>
-        </CardContent>
+        </CardContent> */}
       </Card>
     </Link>
   );
