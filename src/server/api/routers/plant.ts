@@ -32,7 +32,18 @@ export const plantRouter = createTRPCRouter({
 
       return plant;
     }),
+  getPlants: protectedProcedure.query(async ({ ctx }) => {
+    const plants = await ctx.prisma.plant.findMany({
+      where: {
+        userId: ctx.session.user.id,
+      },
+      // orderBy: {
+      //   createdAt: 'desc',
+      // }
+    });
 
+    return plants;
+  }),
   // getSecretMessage: protectedProcedure.query(() => {
   //   return "you can now see this secret message!";
   // }),

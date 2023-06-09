@@ -12,8 +12,6 @@ const PlantPage = ({}: PlantPage) => {
 
   console.log(id);
 
-  // Could just query and reutrn the page based on the id
-
   return (
     <>
       <Layout pageTitle={name as string}>

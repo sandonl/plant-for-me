@@ -3,34 +3,17 @@ import Link from "next/link";
 import Layout from "../components/Layout";
 import PlantCard from "../components/PlantCard";
 import { Button } from "../components/ui/button";
+import { api } from "../utils/api";
+import { NextPage } from "next";
 
 interface dashboardProps {}
 
-const fakeData = [
-  {
-    id: "23213131",
-    name: "White Edge",
-    plantName: "Dieffenbachia White Edge",
-    water: 3,
-  },
-  {
-    id: "212321311",
-    name: "Watermelon Plant",
-    plantName: "Aglaonema 'Favonian'",
-    water: 5,
-  },
-  {
-    id: "2321313as13131",
-    name: "Milky Way",
-    plantName: "Dieffenbachia Milky Way ",
-    water: 9,
-  },
-];
-
-const Dashboard = ({}: dashboardProps) => {
+const Dashboard: NextPage = ({}: dashboardProps) => {
   const { data: session } = useSession({
     required: true,
   });
+
+  const allPlants = api.plant.getPlants.useQuery();
 
   return (
     <>
@@ -44,7 +27,7 @@ const Dashboard = ({}: dashboardProps) => {
             These are your current plants:
           </h2>
           <div className="mx-auto w-96 max-w-4xl md:w-full">
-            {fakeData.map((plant, id) => (
+            {allPlants.data?.map((plant, id) => (
               <PlantCard plant={plant} key={id} />
             ))}
             <div className="flex justify-end py-2">
