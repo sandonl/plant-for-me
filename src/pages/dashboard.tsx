@@ -5,6 +5,7 @@ import PlantCard from "../components/PlantCard";
 import { Button } from "../components/ui/button";
 import { api } from "../utils/api";
 import { NextPage } from "next";
+import PlantCardSkeleton from "../components/PlantCardSkeleton";
 
 interface dashboardProps {}
 
@@ -27,14 +28,22 @@ const Dashboard: NextPage = ({}: dashboardProps) => {
             These are your current plants:
           </h2>
           <div className="mx-auto w-96 max-w-4xl md:w-full">
-            {allPlants.data?.map((plant, id) => (
-              <PlantCard plant={plant} key={id} />
-            ))}
-            <div className="flex justify-end py-2">
-              <Button asChild>
-                <Link href="/addplant">Add Plant</Link>
-              </Button>
-            </div>
+            {allPlants.isLoading || allPlants.isFetching ? (
+              <>
+                <PlantCardSkeleton />
+              </>
+            ) : (
+              <>
+                {allPlants.data?.map((plant, id) => (
+                  <PlantCard plant={plant} key={id} />
+                ))}
+                <div className="flex justify-end py-2">
+                  <Button asChild>
+                    <Link href="/addplant">Add Plant</Link>
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </Layout>

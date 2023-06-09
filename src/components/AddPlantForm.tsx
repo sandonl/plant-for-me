@@ -52,6 +52,8 @@ const AddPlantForm = () => {
     console.log(values);
 
     addPlant.mutate({ id, userId, name, plantName, water, notes });
+
+    // TODO: Add onSuccess
   }
 
   return (
