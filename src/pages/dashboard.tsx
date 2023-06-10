@@ -28,7 +28,9 @@ const Dashboard: NextPage = ({}: dashboardProps) => {
             These are your current plants:
           </h2>
           <div className="mx-auto w-96 max-w-4xl md:w-full">
-            {allPlants.isLoading || allPlants.isFetching ? (
+            {allPlants.isLoading ||
+            allPlants.isFetching ||
+            allPlants.isInitialLoading ? (
               <>
                 <PlantCardSkeleton />
               </>

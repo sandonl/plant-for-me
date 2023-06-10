@@ -31,9 +31,7 @@ const PlantCard = (props: PlantCardProps) => {
   }, []);
 
   return (
-    <Link
-      href={{ pathname: `plants/${id}`, query: { name, plantName, water } }}
-    >
+    <Link href={{ pathname: `plants/${id}` }}>
       <Card className="mb-2 cursor-pointer">
         <CardHeader>
           <CardTitle>{name}</CardTitle>
