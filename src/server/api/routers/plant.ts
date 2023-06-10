@@ -6,14 +6,6 @@ import {
 } from "@/src/server/api/trpc";
 
 export const plantRouter = createTRPCRouter({
-  // hello: publicProcedure
-  //   .input(z.object({ text: z.string() }))
-  //   .query(({ input }) => {
-  //     return {
-  //       greeting: `Hello ${input.text}`,
-  //     };
-  //   }),
-
   addPlant: protectedProcedure
     .input(
       z.object({
@@ -44,6 +36,22 @@ export const plantRouter = createTRPCRouter({
 
     return plants;
   }),
+  getPlant: protectedProcedure
+    .input(
+      z.object({
+        plantId: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const plant = await ctx.prisma.plant.findFirst({
+        where: {
+          id: input.plantId,
+        },
+      });
+
+      return plant;
+    }),
+
   // getSecretMessage: protectedProcedure.query(() => {
   //   return "you can now see this secret message!";
   // }),
