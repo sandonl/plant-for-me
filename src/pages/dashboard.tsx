@@ -14,7 +14,9 @@ const Dashboard: NextPage = ({}: dashboardProps) => {
     required: true,
   });
 
-  const allPlants = api.plant.getPlants.useQuery();
+  const allPlants = api.plant.getPlants.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>

@@ -1,7 +1,9 @@
 import Layout from "@/src/components/Layout";
+import PhotoCard from "@/src/components/PhotoCard";
 import PlantPageSkeleton from "@/src/components/PlantPageSkeleton";
 import { Button } from "@/src/components/ui/button";
 import { Progress } from "@/src/components/ui/progress";
+import { ScrollArea, ScrollBar } from "@/src/components/ui/scroll-area";
 import { api } from "@/src/utils/api";
 import { MoveLeft } from "lucide-react";
 import { getSession } from "next-auth/react";
@@ -34,12 +36,15 @@ const PlantPage = ({}: PlantPage) => {
     <>
       <Layout pageTitle={plantData.data?.name as string}>
         <div className="mx-auto max-w-4xl py-5 md:w-full">
-          <h1 className="text-sm font-bold md:text-3xl">
+          <h1 className="text-md font-bold md:text-3xl">
             {plantData.data?.name}
           </h1>
           <div className="my-3 border-b border-slate-200" />
-          <h2 className="py-3 font-semibold"> {plantData.data?.plantName} </h2>
-          <div className="flex justify-between space-x-4 align-baseline">
+          <h2 className="pb-2 pt-3 font-semibold">
+            {" "}
+            {plantData.data?.plantName}{" "}
+          </h2>
+          <div className="flex items-center justify-between space-x-4 align-baseline">
             <p> Water level: </p>
             <Progress
               value={plantData.data?.water}
@@ -47,8 +52,29 @@ const PlantPage = ({}: PlantPage) => {
             />
           </div>
           <div className="py-10 ">
-            <h3 className="font-semibold">Notes:</h3>
+            <h3 className="pb-1 font-semibold">Notes:</h3>
             <p> {plantData.data?.notes} </p>
+          </div>
+
+          <div className="mb-10 flex flex-col space-y-4">
+            <h3 className="text-md font-semibold md:text-2xl">Photo Log:</h3>
+            <div className="relative">
+              <ScrollArea>
+                <div className="flex space-x-4 pb-4">
+                  <PhotoCard />
+                  <PhotoCard />
+                  <PhotoCard />
+                  <PhotoCard />
+                  <PhotoCard />
+                  <PhotoCard />
+                  <PhotoCard />
+                  <PhotoCard />
+                  <PhotoCard />
+                  <PhotoCard />
+                </div>
+                <ScrollBar orientation="horizontal" />
+              </ScrollArea>
+            </div>
           </div>
           <Button asChild variant="outline">
             <Link href={"/dashboard"}>
