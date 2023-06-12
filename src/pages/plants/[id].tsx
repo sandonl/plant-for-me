@@ -41,8 +41,7 @@ const PlantPage = ({}: PlantPage) => {
           </h1>
           <div className="my-3 border-b border-slate-200" />
           <h2 className="pb-2 pt-3 font-semibold">
-            {" "}
-            {plantData.data?.plantName}{" "}
+            {plantData.data?.plantName}
           </h2>
           <div className="flex items-center justify-between space-x-4 align-baseline">
             <p> Water level: </p>
@@ -56,8 +55,11 @@ const PlantPage = ({}: PlantPage) => {
             <p> {plantData.data?.notes} </p>
           </div>
 
-          <div className="mb-10 flex flex-col space-y-4">
-            <h3 className="text-md font-semibold md:text-2xl">Photo Log:</h3>
+          <div className="mb-5 flex flex-col space-y-4">
+            <h3 className="text-md font-semibold md:text-2xl">Photo Log</h3>
+            <p className="md:text-md text-sm">
+              Upload photos of your plant progress
+            </p>
             <div className="relative">
               <ScrollArea>
                 <div className="flex space-x-4 pb-4">
@@ -76,6 +78,8 @@ const PlantPage = ({}: PlantPage) => {
               </ScrollArea>
             </div>
           </div>
+          <div className="mb-10 h-10 w-10"></div>
+
           <Button asChild variant="outline">
             <Link href={"/dashboard"}>
               <MoveLeft />
