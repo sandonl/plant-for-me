@@ -9,6 +9,8 @@ import { MoveLeft } from "lucide-react";
 import { getSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { supabase } from "@/src/server/supabase/supabaseClient";
+import { useEffect } from "react";
 
 interface PlantPage {}
 
@@ -19,6 +21,15 @@ const PlantPage = ({}: PlantPage) => {
     { plantId: id as string },
     { refetchOnWindowFocus: false }
   );
+
+  useEffect(() => {
+    listImages();
+  }, []);
+
+  const listImages = async () => {
+    const { data, error } = await supabase.storage.listBuckets();
+    console.log(data);
+  };
 
   if (
     plantData.isFetching ||
