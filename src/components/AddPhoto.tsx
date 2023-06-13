@@ -14,6 +14,7 @@ import {
 } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import { useToast } from "./ui/use-toast";
 
 interface AddPhotoProps {
   userId: string;
@@ -23,6 +24,7 @@ interface AddPhotoProps {
 const AddPhoto = ({ userId, plantId }: AddPhotoProps) => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
+  const { toast } = useToast();
 
   const uploadPhoto = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -49,6 +51,10 @@ const AddPhoto = ({ userId, plantId }: AddPhotoProps) => {
     } finally {
       setUploading(false);
       setOpen(false);
+      toast({
+        title: "Upload successful!",
+        description: "A new photo has been added to your plant's photo log",
+      });
     }
   };
 
@@ -81,7 +87,11 @@ const AddPhoto = ({ userId, plantId }: AddPhotoProps) => {
             </div>
           </div>
           <DialogFooter className="">
-            {uploading && <span> Uploading ... </span>}
+            {uploading ? (
+              <span className="text-xs"> Uploading ... </span>
+            ) : (
+              <div className="p-2" />
+            )}
           </DialogFooter>
         </DialogContent>
       </Dialog>
