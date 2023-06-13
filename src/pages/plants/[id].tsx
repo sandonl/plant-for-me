@@ -4,6 +4,7 @@ import PhotoCard from "@/src/components/PhotoCard";
 import PlantPageSkeleton from "@/src/components/PlantPageSkeleton";
 import { Button } from "@/src/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/src/components/ui/scroll-area";
+import { env } from "@/src/env.mjs";
 import { supabase } from "@/src/server/supabase/supabaseClient";
 import { api } from "@/src/utils/api";
 import { MoveLeft } from "lucide-react";
@@ -24,8 +25,7 @@ const PlantPage = ({}: PlantPage) => {
     { refetchOnWindowFocus: false }
   );
 
-  const STORAGE_URL = `https://ymxijwytvodvkozlfmym.supabase.co/storage/v1/object/public/plants/${userId}/${id}`;
-
+  const uploadUrl = `${env.NEXT_PUBLIC_STORAGE_URL}${userId}/${id}`;
   const [images, setImages] = useState<any>([]);
 
   useEffect(() => {
@@ -93,14 +93,14 @@ const PlantPage = ({}: PlantPage) => {
                 <div className="flex space-x-4 pb-4">
                   {images[0] ? (
                     <>
-                      <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
-                      <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
-                      <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
-                      <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
-                      <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
-                      <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
-                      <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
-                      <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
+                      <PhotoCard source={`${uploadUrl}/${images[0].name}`} />
+                      <PhotoCard source={`${uploadUrl}/${images[0].name}`} />
+                      <PhotoCard source={`${uploadUrl}/${images[0].name}`} />
+                      <PhotoCard source={`${uploadUrl}/${images[0].name}`} />
+                      <PhotoCard source={`${uploadUrl}/${images[0].name}`} />
+                      <PhotoCard source={`${uploadUrl}/${images[0].name}`} />
+                      <PhotoCard source={`${uploadUrl}/${images[0].name}`} />
+                      <PhotoCard source={`${uploadUrl}/${images[0].name}`} />
                     </>
                   ) : null}
                   <AddPhoto userId={userId as string} plantId={id as string} />

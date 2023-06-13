@@ -21,7 +21,8 @@ interface AddPhotoProps {
 }
 
 const AddPhoto = ({ userId, plantId }: AddPhotoProps) => {
-  const [uploading, setUploading] = useState(false);
+  const [uploading, setUploading] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const uploadPhoto = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -47,15 +48,15 @@ const AddPhoto = ({ userId, plantId }: AddPhotoProps) => {
       alert(error);
     } finally {
       setUploading(false);
-      console.log("UPLOAD COMPLETE");
+      setOpen(false);
     }
   };
 
   return (
     <>
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <div className="h-100 flex w-[250px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-lg bg-slate-50 object-cover shadow-sm transition-all hover:bg-slate-200">
+          <div className="flex h-auto w-[250px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-lg bg-slate-50 object-cover shadow-sm transition-all hover:bg-slate-200">
             <PlusIcon size={96} />
           </div>
         </DialogTrigger>
@@ -80,8 +81,7 @@ const AddPhoto = ({ userId, plantId }: AddPhotoProps) => {
             </div>
           </div>
           <DialogFooter className="">
-            {/* {uploading && <Loader2 />} */}
-            <Loader2 />
+            {uploading && <span> Uploading ... </span>}
           </DialogFooter>
         </DialogContent>
       </Dialog>
