@@ -1,3 +1,4 @@
+import AddPhoto from "@/src/components/AddPhoto";
 import Layout from "@/src/components/Layout";
 import PhotoCard from "@/src/components/PhotoCard";
 import PlantPageSkeleton from "@/src/components/PlantPageSkeleton";
@@ -102,6 +103,7 @@ const PlantPage = ({}: PlantPage) => {
                       <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
                     </>
                   ) : null}
+                  <AddPhoto />
                 </div>
                 <ScrollBar orientation="horizontal" />
               </ScrollArea>
