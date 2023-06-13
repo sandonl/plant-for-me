@@ -103,7 +103,7 @@ const PlantPage = ({}: PlantPage) => {
                       <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
                     </>
                   ) : null}
-                  <AddPhoto />
+                  <AddPhoto userId={userId as string} plantId={id as string} />
                 </div>
                 <ScrollBar orientation="horizontal" />
               </ScrollArea>
