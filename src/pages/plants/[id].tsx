@@ -2,33 +2,50 @@ import Layout from "@/src/components/Layout";
 import PhotoCard from "@/src/components/PhotoCard";
 import PlantPageSkeleton from "@/src/components/PlantPageSkeleton";
 import { Button } from "@/src/components/ui/button";
-import { Progress } from "@/src/components/ui/progress";
 import { ScrollArea, ScrollBar } from "@/src/components/ui/scroll-area";
+import { supabase } from "@/src/server/supabase/supabaseClient";
 import { api } from "@/src/utils/api";
 import { MoveLeft } from "lucide-react";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { supabase } from "@/src/server/supabase/supabaseClient";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface PlantPage {}
 
 const PlantPage = ({}: PlantPage) => {
   const router = useRouter();
   const { id } = router.query;
+  const { data: session } = useSession();
+  const userId = session?.user.id;
   const plantData = api.plant.getPlant.useQuery(
     { plantId: id as string },
     { refetchOnWindowFocus: false }
   );
+
+  const STORAGE_URL = `https://ymxijwytvodvkozlfmym.supabase.co/storage/v1/object/public/plants/${userId}/${id}`;
+
+  const [images, setImages] = useState<any>([]);
 
   useEffect(() => {
     listImages();
   }, []);
 
   const listImages = async () => {
-    const { data, error } = await supabase.storage.listBuckets();
-    console.log(data);
+    const { data, error } = await supabase.storage
+      .from("plants")
+      .list(`${userId}/${id}`);
+
+    console.log(data, error);
+
+    if (data) {
+      console.log(data);
+      setImages(data);
+      console.log(images);
+    } else {
+      alert("Error loading images");
+      console.log(error);
+    }
   };
 
   if (
@@ -36,11 +53,7 @@ const PlantPage = ({}: PlantPage) => {
     plantData.isLoading ||
     plantData.isInitialLoading
   ) {
-    return (
-      <>
-        <PlantPageSkeleton />
-      </>
-    );
+    return <PlantPageSkeleton />;
   }
 
   return (
@@ -55,11 +68,14 @@ const PlantPage = ({}: PlantPage) => {
             {plantData.data?.plantName}
           </h2>
           <div className="flex items-center justify-between space-x-4 align-baseline">
-            <p> Water level: </p>
-            <Progress
+            <p> Water level: </p>{" "}
+            <span className="font-bold">
+              Every {plantData.data?.water} days
+            </span>
+            {/* <Progress
               value={plantData.data?.water}
               className="w-1/2 bg-slate-200"
-            />
+            /> */}
           </div>
           <div className="py-10 ">
             <h3 className="pb-1 font-semibold">Notes:</h3>
@@ -71,19 +87,21 @@ const PlantPage = ({}: PlantPage) => {
             <p className="md:text-md text-sm">
               Upload photos of your plant progress
             </p>
-            <div className="relative">
+            <div className="relative max-w-md lg:max-w-none">
               <ScrollArea>
                 <div className="flex space-x-4 pb-4">
-                  <PhotoCard />
-                  <PhotoCard />
-                  <PhotoCard />
-                  <PhotoCard />
-                  <PhotoCard />
-                  <PhotoCard />
-                  <PhotoCard />
-                  <PhotoCard />
-                  <PhotoCard />
-                  <PhotoCard />
+                  {images[0] ? (
+                    <>
+                      <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
+                      <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
+                      <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
+                      <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
+                      <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
+                      <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
+                      <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
+                      <PhotoCard source={`${STORAGE_URL}/${images[0].name}`} />
+                    </>
+                  ) : null}
                 </div>
                 <ScrollBar orientation="horizontal" />
               </ScrollArea>
