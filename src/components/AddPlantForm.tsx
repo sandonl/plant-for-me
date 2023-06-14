@@ -20,6 +20,7 @@ import { MoveLeft } from "lucide-react";
 import { v4 as uuid } from "uuid";
 import { api } from "../utils/api";
 import { useSession } from "next-auth/react";
+import { useToast } from "./ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -33,6 +34,7 @@ const AddPlantForm = () => {
   const { data } = useSession();
   const addPlant = api.plant.addPlant.useMutation();
   const userId = data?.user.id!;
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,7 +55,10 @@ const AddPlantForm = () => {
 
     addPlant.mutate({ id, userId, name, plantName, water, notes });
 
-    // TODO: Add onSuccess
+    toast({
+      title: "Plant added!",
+      description: "A new plant has been added to your collection",
+    });
   }
 
   return (
@@ -85,7 +90,7 @@ const AddPlantForm = () => {
                 <Input placeholder="Scientific Plant Name" {...field} />
               </FormControl>
               <FormDescription>
-                This is the scientific plant name.
+                This is your plant's scientific plant name.
               </FormDescription>
               <FormMessage />
             </FormItem>

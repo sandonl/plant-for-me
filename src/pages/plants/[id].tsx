@@ -15,6 +15,14 @@ import { useEffect, useState } from "react";
 
 interface PlantPage {}
 
+interface Image {
+  name: string;
+  id: string;
+  created_at: string;
+  last_accessed_at: string;
+  updated_at: string;
+}
+
 const PlantPage = ({}: PlantPage) => {
   const router = useRouter();
   const { id } = router.query;
@@ -26,7 +34,7 @@ const PlantPage = ({}: PlantPage) => {
   );
 
   const uploadUrl = `${env.NEXT_PUBLIC_STORAGE_URL}${userId}/${id}`;
-  const [images, setImages] = useState<any>([]);
+  const [images, setImages] = useState<Image[]>([]);
 
   useEffect(() => {
     listImages();
@@ -37,10 +45,7 @@ const PlantPage = ({}: PlantPage) => {
       .from("plants")
       .list(`${userId}/${id}`);
 
-    console.log(data, error);
-
     if (data) {
-      console.log(data);
       setImages(data);
       console.log(images);
     } else {
@@ -91,18 +96,18 @@ const PlantPage = ({}: PlantPage) => {
             <div className="relative max-w-md lg:max-w-none">
               <ScrollArea>
                 <div className="flex space-x-4 pb-4">
-                  {images[0] ? (
+                  {images[0] && (
                     <>
-                      <PhotoCard source={`${uploadUrl}/${images[0].name}`} />
-                      <PhotoCard source={`${uploadUrl}/${images[0].name}`} />
-                      <PhotoCard source={`${uploadUrl}/${images[0].name}`} />
-                      <PhotoCard source={`${uploadUrl}/${images[0].name}`} />
-                      <PhotoCard source={`${uploadUrl}/${images[0].name}`} />
-                      <PhotoCard source={`${uploadUrl}/${images[0].name}`} />
-                      <PhotoCard source={`${uploadUrl}/${images[0].name}`} />
-                      <PhotoCard source={`${uploadUrl}/${images[0].name}`} />
+                      {images.map((image, id) => {
+                        return (
+                          <PhotoCard
+                            source={`${uploadUrl}/${image.name}`}
+                            key={id}
+                          />
+                        );
+                      })}
                     </>
-                  ) : null}
+                  )}
                   <AddPhoto userId={userId as string} plantId={id as string} />
                 </div>
                 <ScrollBar orientation="horizontal" />

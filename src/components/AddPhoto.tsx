@@ -62,7 +62,7 @@ const AddPhoto = ({ userId, plantId }: AddPhotoProps) => {
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <div className="flex h-auto w-[250px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-lg bg-slate-50 object-cover shadow-sm transition-all hover:bg-slate-200">
+          <div className="flex h-[333px] w-[250px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-lg bg-slate-50 object-cover shadow-sm transition-all hover:bg-slate-200">
             <PlusIcon size={96} />
           </div>
         </DialogTrigger>

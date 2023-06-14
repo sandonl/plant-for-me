@@ -8,8 +8,6 @@ import { Button } from "../components/ui/button";
 import Link from "next/link";
 
 const Home: NextPage = () => {
-  // const hello = api.example.hello.useQuery({ text: "from tRPC" });
-
   const { status } = useSession();
 
   return (
@@ -22,7 +20,7 @@ const Home: NextPage = () => {
                 🌱 Plant<span className="text-green-300">er</span>
               </h1>
               <div className="p-4" />
-              <h2 className="text-3xl font-bold text-slate-900">
+              <h2 className="text-center text-3xl font-bold text-slate-900">
                 Organise, Manage and Maintain Your Plants
               </h2>
               <div className="p-2" />
@@ -50,6 +48,7 @@ const Home: NextPage = () => {
                 </Button>
               )}
             </main>
+            {/* <div className="h-screen">Showcase 1</div> */}
           </div>
         </div>
       </Layout>

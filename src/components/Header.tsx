@@ -9,7 +9,7 @@ const Header = ({}: HeaderProps) => {
 
   return (
     <header className="sticky top-0 z-40 box-border w-full border-b border-b-slate-200 bg-slate-100">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-6xl">
         <div className="flex h-16 items-center justify-between space-x-1">
           <Link href={"/"}>
             <h2 className="text-2xl font-bold hover:text-slate-600">
@@ -19,7 +19,11 @@ const Header = ({}: HeaderProps) => {
           <div className="flex items-center space-x-5">
             {status === "authenticated" && (
               <>
-                <Button asChild variant="secondary">
+                <Button
+                  asChild
+                  variant="secondary"
+                  className="hover:text-slate-600"
+                >
                   <Link href="/dashboard">Dashboard</Link>
                 </Button>
                 <Button onClick={() => void signOut()}>Logout</Button>

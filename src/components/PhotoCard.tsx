@@ -7,14 +7,14 @@ interface PhotoCardProps {
 
 const PhotoCard = ({ source }: PhotoCardProps) => {
   return (
-    <div className="w-[250px] overflow-hidden rounded-lg shadow-sm">
+    <div className="h-[333px] w-[250px] overflow-hidden rounded-lg shadow-sm">
       <Image
         src={source}
         alt={""}
-        width={150}
-        height={150}
+        width={250}
+        height={333}
         className={cn(
-          "portrait h-auto w-auto object-cover transition-all hover:scale-105"
+          "portrait h-[333px] w-[250px] object-cover transition-all hover:scale-105"
         )}
       />
     </div>
