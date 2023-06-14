@@ -27,14 +27,13 @@ const PlantPage = ({}: PlantPage) => {
   const router = useRouter();
   const { id } = router.query;
   const { data: session } = useSession();
+  const [images, setImages] = useState<Image[]>([]);
   const userId = session?.user.id;
+  const uploadUrl = `${env.NEXT_PUBLIC_STORAGE_URL}${userId}/${id}`;
   const plantData = api.plant.getPlant.useQuery(
     { plantId: id as string },
     { refetchOnWindowFocus: false }
   );
-
-  const uploadUrl = `${env.NEXT_PUBLIC_STORAGE_URL}${userId}/${id}`;
-  const [images, setImages] = useState<Image[]>([]);
 
   useEffect(() => {
     getImages();
@@ -75,7 +74,7 @@ const PlantPage = ({}: PlantPage) => {
           <div className="flex items-center justify-between space-x-4 align-baseline">
             <p> Water level: </p>{" "}
             <span className="font-bold">
-              Every {plantData.data?.water} days
+              Every {plantData.data?.waterFreq} days
             </span>
             {/* <Progress
               value={plantData.data?.water}

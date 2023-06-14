@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/src/components/ui/button";
 import {
   Form,
@@ -12,21 +10,20 @@ import {
 } from "@/src/components/ui/form";
 import { Input } from "@/src/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { Textarea } from "./ui/textarea";
-import Link from "next/link";
 import { MoveLeft } from "lucide-react";
-import { v4 as uuid } from "uuid";
-import { api } from "../utils/api";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { v4 as uuid } from "uuid";
+import * as z from "zod";
+import { api } from "../utils/api";
+import { Textarea } from "./ui/textarea";
 import { useToast } from "./ui/use-toast";
-import { supabase } from "@/src/server/supabase/supabaseClient";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
   plantName: z.string().min(2).max(50),
-  water: z.coerce.number(),
+  waterFreq: z.coerce.number(),
   notes: z.string().min(2),
 });
 
@@ -42,7 +39,7 @@ const AddPlantForm = () => {
     defaultValues: {
       name: "",
       plantName: "",
-      water: 7,
+      waterFreq: 7,
       notes: "",
     },
   });
@@ -51,10 +48,9 @@ const AddPlantForm = () => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     const id = uuid();
-    const { name, plantName, water, notes } = values;
-    console.log(values);
+    const { name, plantName, waterFreq, notes } = values;
 
-    addPlant.mutate({ id, userId, name, plantName, water, notes });
+    addPlant.mutate({ id, userId, name, plantName, waterFreq, notes });
 
     toast({
       title: "Plant added!",
@@ -99,7 +95,7 @@ const AddPlantForm = () => {
         />
         <FormField
           control={form.control}
-          name="water"
+          name="waterFreq"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Water (Every X days)</FormLabel>

@@ -16,12 +16,14 @@ datasource db {
 }
 
 model Plant {
-    userId    String
-    id        String @id @default(cuid())
-    name      String
-    plantName String
-    water     Int
-    notes     String
+    userId      String
+    id          String   @id @default(cuid())
+    name        String
+    plantName   String
+    waterFreq   Int
+    notes       String
+    createdAt   DateTime @default(now())
+    lastWatered DateTime @default(now())
 }
 
 // Necessary for Next auth

@@ -1,8 +1,6 @@
 import { type NextPage } from "next";
 import { signIn, useSession } from "next-auth/react";
 import Layout from "../components/Layout";
-
-// import { api } from "~/utils/api";
 import Footer from "../components/Footer";
 import { Button } from "../components/ui/button";
 import Link from "next/link";

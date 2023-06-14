@@ -16,14 +16,14 @@ interface PlantCardProps {
     id: string;
     name: string;
     plantName: string;
-    water: number;
+    waterFreq: number;
   };
 }
 
 const PlantCard = (props: PlantCardProps) => {
-  const { name, plantName, water, id } = props.plant;
+  const { name, plantName, waterFreq, id } = props.plant;
 
-  const [progress, setProgress] = useState(water);
+  const [progress, setProgress] = useState(waterFreq);
 
   useEffect(() => {
     const timer = setTimeout(() => setProgress(progress * 10), 500);

@@ -13,7 +13,7 @@ export const plantRouter = createTRPCRouter({
         id: z.string(),
         name: z.string().min(2).max(50),
         plantName: z.string().min(2).max(50),
-        water: z.number(),
+        waterFreq: z.number(),
         notes: z.string().min(2),
       })
     )

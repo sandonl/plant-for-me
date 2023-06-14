@@ -25,30 +25,44 @@ const Dashboard: NextPage = ({}: dashboardProps) => {
           <h1 className="my-3 text-center text-sm font-bold md:text-2xl">
             Welcome {session?.user.name}!
           </h1>
-
-          <h2 className="mb-5 text-center font-semibold">
-            These are your current plants:
-          </h2>
-          <div className="mx-auto w-96 max-w-4xl md:w-full">
-            {allPlants.isLoading ||
-            allPlants.isFetching ||
-            allPlants.isInitialLoading ? (
-              <>
+          <>
+            <div className="mx-auto w-96 max-w-4xl md:w-full">
+              {allPlants.isLoading ||
+              allPlants.isFetching ||
+              allPlants.isInitialLoading ? (
                 <PlantCardSkeleton />
-              </>
-            ) : (
-              <>
-                {allPlants.data?.map((plant, id) => (
-                  <PlantCard plant={plant} key={id} />
-                ))}
-                <div className="flex justify-end py-2">
-                  <Button asChild>
-                    <Link href="/addplant">Add Plant</Link>
-                  </Button>
-                </div>
-              </>
-            )}
-          </div>
+              ) : (
+                <>
+                  {allPlants.data?.length === 0 ? (
+                    <>
+                      <h2 className="mb-5 text-center font-semibold">
+                        You don't currently have any plants, add one below
+                      </h2>
+                      <div className="flex justify-end py-2">
+                        <Button asChild>
+                          <Link href="/addplant">Add Plant</Link>
+                        </Button>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <h2 className="mb-5 text-center font-semibold">
+                        This is your current plant collection:
+                      </h2>
+                      {allPlants.data?.map((plant, id) => (
+                        <PlantCard plant={plant} key={id} />
+                      ))}
+                      <div className="flex justify-end py-2">
+                        <Button asChild>
+                          <Link href="/addplant">Add Plant</Link>
+                        </Button>
+                      </div>
+                    </>
+                  )}
+                </>
+              )}
+            </div>
+          </>
         </div>
       </Layout>
     </>
