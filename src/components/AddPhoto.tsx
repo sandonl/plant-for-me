@@ -19,9 +19,10 @@ import { useToast } from "./ui/use-toast";
 interface AddPhotoProps {
   userId: string;
   plantId: string;
+  getImages: () => void;
 }
 
-const AddPhoto = ({ userId, plantId }: AddPhotoProps) => {
+const AddPhoto = ({ userId, plantId, getImages }: AddPhotoProps) => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const { toast } = useToast();
@@ -51,6 +52,7 @@ const AddPhoto = ({ userId, plantId }: AddPhotoProps) => {
     } finally {
       setUploading(false);
       setOpen(false);
+      getImages();
       toast({
         title: "Upload successful!",
         description: "A new photo has been added to your plant's photo log",

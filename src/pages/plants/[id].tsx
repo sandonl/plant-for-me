@@ -37,17 +37,16 @@ const PlantPage = ({}: PlantPage) => {
   const [images, setImages] = useState<Image[]>([]);
 
   useEffect(() => {
-    listImages();
+    getImages();
   }, []);
 
-  const listImages = async () => {
+  const getImages = async () => {
     const { data, error } = await supabase.storage
       .from("plants")
       .list(`${userId}/${id}`);
 
     if (data) {
       setImages(data);
-      console.log(images);
     } else {
       alert("Error loading images");
       console.log(error);
@@ -108,7 +107,11 @@ const PlantPage = ({}: PlantPage) => {
                       })}
                     </>
                   )}
-                  <AddPhoto userId={userId as string} plantId={id as string} />
+                  <AddPhoto
+                    userId={userId as string}
+                    plantId={id as string}
+                    getImages={getImages}
+                  />
                 </div>
                 <ScrollBar orientation="horizontal" />
               </ScrollArea>

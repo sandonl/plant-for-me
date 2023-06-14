@@ -21,6 +21,7 @@ import { v4 as uuid } from "uuid";
 import { api } from "../utils/api";
 import { useSession } from "next-auth/react";
 import { useToast } from "./ui/use-toast";
+import { supabase } from "@/src/server/supabase/supabaseClient";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -32,9 +33,9 @@ const formSchema = z.object({
 // This should be a protected route and userId passed as a prop
 const AddPlantForm = () => {
   const { data } = useSession();
+  const { toast } = useToast();
   const addPlant = api.plant.addPlant.useMutation();
   const userId = data?.user.id!;
-  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
