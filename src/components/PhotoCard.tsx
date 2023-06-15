@@ -10,6 +10,7 @@ const PhotoCard = ({ source }: PhotoCardProps) => {
     <div className="h-[333px] w-[250px] overflow-hidden rounded-lg shadow-sm">
       <Image
         src={source}
+        priority
         alt={""}
         width={250}
         height={333}

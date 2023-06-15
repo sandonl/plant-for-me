@@ -13,6 +13,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { calculateNextWater } from "@/src/utils/dates";
+import { toast } from "@/src/components/ui/use-toast";
 
 interface PlantPage {}
 
@@ -35,6 +36,7 @@ const PlantPage = ({}: PlantPage) => {
 
   const userId = session?.user.id;
   const uploadUrl = `${env.NEXT_PUBLIC_STORAGE_URL}${userId}/${id}`;
+  const updateLastWatered = api.plant.updateLastWatered.useMutation();
   const plantData = api.plant.getPlant.useQuery(
     { plantId: id as string },
     { refetchOnWindowFocus: false }
@@ -66,6 +68,15 @@ const PlantPage = ({}: PlantPage) => {
     }
   };
 
+  const waterPlant = () => {
+    const now = new Date();
+    updateLastWatered.mutate({ lastWatered: now, plantId: id as string });
+    toast({
+      title: "Plant watered",
+      description: "You have watered your plant, Great job!",
+    });
+  };
+
   if (
     plantData.isFetching ||
     plantData.isLoading ||
@@ -92,7 +103,7 @@ const PlantPage = ({}: PlantPage) => {
             ) : (
               <p className="font-bold text-rose-400">Inspect plant for water</p>
             )}
-            <Button>Water</Button>
+            <Button onClick={waterPlant}>Water</Button>
             {/* <Progress
               value={plantData.data?.water}
               className="w-1/2 bg-slate-200"

@@ -51,6 +51,21 @@ export const plantRouter = createTRPCRouter({
 
       return plant;
     }),
+  updateLastWatered: protectedProcedure
+    .input(
+      z.object({
+        plantId: z.string(),
+        lastWatered: z.date(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { plantId, lastWatered } = input;
+      const plant = await ctx.prisma.plant.update({
+        where: { id: plantId },
+        data: { lastWatered: lastWatered },
+      });
+      return plant;
+    }),
 
   // getSecretMessage: protectedProcedure.query(() => {
   //   return "you can now see this secret message!";
