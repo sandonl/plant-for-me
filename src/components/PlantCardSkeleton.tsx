@@ -1,9 +1,4 @@
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/src/components/ui/card";
+import { Card } from "@/src/components/ui/card";
 import { Skeleton } from "./ui/skeleton";
 
 const PlantCardSkeleton = () => {

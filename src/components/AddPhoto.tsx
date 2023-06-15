@@ -1,8 +1,7 @@
 import { supabase } from "@/src/server/supabase/supabaseClient";
-import { Loader2, PlusIcon } from "lucide-react";
+import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
-import { Button } from "./ui/button";
 import {
   Dialog,
   DialogContent,

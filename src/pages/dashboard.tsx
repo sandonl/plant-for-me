@@ -1,4 +1,4 @@
-import { getSession, useSession } from "next-auth/react";
+import { GetSessionParams, getSession, useSession } from "next-auth/react";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import PlantCard from "../components/PlantCard";
@@ -36,7 +36,8 @@ const Dashboard: NextPage = ({}: dashboardProps) => {
                   {allPlants.data?.length === 0 ? (
                     <>
                       <h2 className="mb-5 text-center font-semibold">
-                        You don't currently have any plants, add one below
+                        You don`&apos;`t currently have any plants, add one
+                        below
                       </h2>
                       <div className="flex justify-end py-2">
                         <Button asChild>
@@ -70,7 +71,7 @@ const Dashboard: NextPage = ({}: dashboardProps) => {
 };
 export default Dashboard;
 
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps(context: GetSessionParams) {
   const session = await getSession(context);
 
   if (!session) {

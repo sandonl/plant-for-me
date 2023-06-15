@@ -75,6 +75,8 @@ const PlantPage = ({}: PlantPage) => {
       title: "Plant watered",
       description: "You have watered your plant, Great job!",
     });
+
+    plantData.refetch();
   };
 
   if (

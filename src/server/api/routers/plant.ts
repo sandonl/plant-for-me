@@ -1,9 +1,5 @@
+import { createTRPCRouter, protectedProcedure } from "@/src/server/api/trpc";
 import { z } from "zod";
-import {
-  createTRPCRouter,
-  publicProcedure,
-  protectedProcedure,
-} from "@/src/server/api/trpc";
 
 export const plantRouter = createTRPCRouter({
   addPlant: protectedProcedure
@@ -66,8 +62,4 @@ export const plantRouter = createTRPCRouter({
       });
       return plant;
     }),
-
-  // getSecretMessage: protectedProcedure.query(() => {
-  //   return "you can now see this secret message!";
-  // }),
 });

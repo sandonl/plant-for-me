@@ -1,9 +1,7 @@
 import Layout from "./Layout";
 import { Skeleton } from "./ui/skeleton";
 
-interface PlantPageSkeletonProps {}
-
-const PlantPageSkeleton = ({}: PlantPageSkeletonProps) => {
+const PlantPageSkeleton = () => {
   return (
     <>
       <Layout pageTitle="Loading...">

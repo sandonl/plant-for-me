@@ -3,9 +3,7 @@ import { getSession } from "next-auth/react";
 import AddPlantForm from "../components/AddPlantForm";
 import Layout from "../components/Layout";
 
-interface addplantProps {}
-
-const addplant: NextPage = ({}: addplantProps) => {
+const addplant: NextPage = () => {
   return (
     <Layout pageTitle="Add Plant">
       <div className="mx-auto max-w-4xl py-5 md:w-full">

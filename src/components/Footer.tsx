@@ -1,6 +1,4 @@
-interface FooterProps {}
-
-const Footer = ({}: FooterProps) => {
+const Footer = () => {
   return (
     <>
       <footer className="bottom-0 z-40 box-border max-h-12 w-full border-t border-t-slate-200 bg-slate-100">

@@ -1,14 +1,11 @@
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/src/components/ui/card";
 import { useEffect, useState } from "react";
 
-import { Progress } from "@/src/components/ui/progress";
 import Link from "next/link";
 
 interface PlantCardProps {
