@@ -12,6 +12,7 @@ import { getSession, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { calculateNextWater } from "@/src/utils/dates";
 
 interface PlantPage {}
 
@@ -27,7 +28,11 @@ const PlantPage = ({}: PlantPage) => {
   const router = useRouter();
   const { id } = router.query;
   const { data: session } = useSession();
+
   const [images, setImages] = useState<Image[]>([]);
+  const [lastWatered, setLastWatered] = useState<Date>();
+  const [diffDays, setDiffDays] = useState<number>();
+
   const userId = session?.user.id;
   const uploadUrl = `${env.NEXT_PUBLIC_STORAGE_URL}${userId}/${id}`;
   const plantData = api.plant.getPlant.useQuery(
@@ -38,6 +43,15 @@ const PlantPage = ({}: PlantPage) => {
   useEffect(() => {
     getImages();
   }, []);
+
+  useEffect(() => {
+    if (plantData.data) {
+      setLastWatered(plantData.data.lastWatered);
+      if (lastWatered) {
+        setDiffDays(plantData.data.waterFreq - calculateNextWater(lastWatered));
+      }
+    }
+  }, [plantData]);
 
   const getImages = async () => {
     const { data, error } = await supabase.storage
@@ -68,14 +82,17 @@ const PlantPage = ({}: PlantPage) => {
             {plantData.data?.name}
           </h1>
           <div className="my-3 border-b border-slate-200" />
-          <h2 className="pb-2 pt-3 font-semibold">
-            {plantData.data?.plantName}
-          </h2>
+          <h2 className="pt-3 font-semibold">{plantData.data?.plantName}</h2>
           <div className="flex items-center justify-between space-x-4 align-baseline">
-            <p> Water level: </p>{" "}
-            <span className="font-bold">
-              Every {plantData.data?.waterFreq} days
-            </span>
+            {diffDays && diffDays > 0 ? (
+              <p>
+                Water in the next
+                <span className="font-bold"> {diffDays} </span>days
+              </p>
+            ) : (
+              <p className="font-bold text-rose-400">Inspect plant for water</p>
+            )}
+            <Button>Water</Button>
             {/* <Progress
               value={plantData.data?.water}
               className="w-1/2 bg-slate-200"

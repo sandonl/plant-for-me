@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Layout pageTitle={"Home"}>
-        <div className="bg-gradient-to-r from-slate-100 to-green-100">
+        <div className="bg-gradient-to-t from-slate-100 to-green-100">
           <div className="mx-auto max-w-5xl">
             <main className="flex h-[calc(100vh-4rem)] flex-col items-center justify-center">
               <h1 className="text-6xl font-bold text-slate-900">
