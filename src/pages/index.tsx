@@ -4,6 +4,7 @@ import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 import { Button } from "../components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 const Home: NextPage = () => {
   const { status } = useSession();
@@ -18,13 +19,13 @@ const Home: NextPage = () => {
                 🌱 Plant<span className="text-green-300">er</span>
               </h1>
               <div className="p-4" />
-              <h2 className="text-center text-3xl font-bold text-slate-900">
+              <h2 className="mx-5 text-center text-3xl font-bold text-slate-900">
                 Organise, Manage and Maintain Your Plants
               </h2>
               <div className="p-2" />
               <div className="w-11/12 border-b border-b-slate-200" />
               <div className="p-2" />
-              <h3 className="text-center text-xl font-bold text-slate-900">
+              <h3 className="mx-5 text-center text-xl font-bold text-slate-900">
                 A central dashboard that helps you track the health of your
                 plants, when to water them, and keep track of information to
                 help them stay healthy
@@ -46,7 +47,23 @@ const Home: NextPage = () => {
                 </Button>
               )}
             </main>
-            {/* <div className="h-screen">Showcase 1</div> */}
+            <div className="h-screen">
+              <div className="relative aspect-video w-full">
+                <Image
+                  src="/hero/hero.png"
+                  alt={""}
+                  fill
+                  sizes="(max-width: 960px) 100vw, 960px"
+                  className="h-auto w-full"
+                />
+              </div>
+              <h2 className="mx-5 my-10 text-center text-3xl font-bold">
+                Keep track of information relevant to each plant
+              </h2>
+              <h2 className="mx-5 my-10 text-center text-3xl font-bold">
+                Keep photos of your plant progress
+              </h2>
+            </div>
           </div>
         </div>
       </Layout>

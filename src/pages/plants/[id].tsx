@@ -95,14 +95,23 @@ const PlantPage = () => {
           <div className="my-3 border-b border-slate-200" />
           <h2 className="pt-3 font-semibold">{plantData.data?.plantName}</h2>
           <div className="flex items-center justify-between space-x-4 align-baseline">
-            {diffDays && diffDays > 0 ? (
-              <p>
-                Water in the next
-                <span className="font-bold"> {diffDays} </span>days
-              </p>
+            {diffDays ? (
+              <>
+                {diffDays > 0 ? (
+                  <p>
+                    Water in the next
+                    <span className="font-bold"> {diffDays} </span>days
+                  </p>
+                ) : (
+                  <p className="font-bold text-rose-400">
+                    Inspect plant for water
+                  </p>
+                )}
+              </>
             ) : (
-              <p className="font-bold text-rose-400">Inspect plant for water</p>
+              <> Loading ... </>
             )}
+
             <Button onClick={waterPlant}>Water</Button>
             {/* <Progress
               value={plantData.data?.water}
