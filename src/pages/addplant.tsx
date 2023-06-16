@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import { getSession } from "next-auth/react";
+import type { GetSessionParams } from "next-auth/react";
 import AddPlantForm from "../components/AddPlantForm";
 import Layout from "../components/Layout";
 
@@ -17,7 +18,7 @@ const addplant: NextPage = () => {
 };
 export default addplant;
 
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps(context: GetSessionParams) {
   const session = await getSession(context);
 
   if (!session) {

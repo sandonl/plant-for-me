@@ -4,7 +4,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/src/components/ui/card";
-import { useEffect, useState } from "react";
 
 import Link from "next/link";
 
@@ -18,14 +17,14 @@ interface PlantCardProps {
 }
 
 const PlantCard = (props: PlantCardProps) => {
-  const { name, plantName, waterFreq, id } = props.plant;
+  const { name, plantName, id } = props.plant;
 
-  const [progress, setProgress] = useState(waterFreq);
+  // const [progress, setProgress] = useState(waterFreq);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setProgress(progress * 10), 500);
-    return () => clearTimeout(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => setProgress(progress * 10), 500);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   return (
     <Link href={{ pathname: `plants/${id}` }}>

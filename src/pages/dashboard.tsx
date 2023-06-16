@@ -1,15 +1,14 @@
-import { GetSessionParams, getSession, useSession } from "next-auth/react";
+import type { GetSessionParams } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import PlantCard from "../components/PlantCard";
 import { Button } from "../components/ui/button";
 import { api } from "../utils/api";
-import { NextPage } from "next";
+import type { NextPage } from "next";
 import PlantCardSkeleton from "../components/PlantCardSkeleton";
 
-interface dashboardProps {}
-
-const Dashboard: NextPage = ({}: dashboardProps) => {
+const Dashboard: NextPage = () => {
   const { data: session } = useSession({
     required: true,
   });

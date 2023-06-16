@@ -33,17 +33,19 @@ const AddPhoto = ({ userId, plantId, getImages }: AddPhotoProps) => {
       if (!event.target.files || event.target.files.length === 0) {
         throw new Error("You must select an image to upload!");
       } else {
-        const file = event.target.files[0];
-        const fileExt = file?.name.split(".").pop();
-        const fileName = `${uuid()}.${fileExt}`;
-        const filePath = `${userId}/${plantId}/${fileName}`;
+        if (event.target.files[0]) {
+          const file = event.target.files[0];
+          const fileExt = file.name.split(".").pop();
+          const fileName = `${uuid()}.${fileExt}`;
+          const filePath = `${userId}/${plantId}/${fileName}`;
 
-        const { error: uploadError } = await supabase.storage
-          .from("plants")
-          .upload(filePath, file!);
+          const { error: uploadError } = await supabase.storage
+            .from("plants")
+            .upload(filePath, file);
 
-        if (uploadError) {
-          throw uploadError;
+          if (uploadError) {
+            throw uploadError;
+          }
         }
       }
     } catch (error) {

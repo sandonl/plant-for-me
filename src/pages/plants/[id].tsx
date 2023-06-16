@@ -9,13 +9,12 @@ import { supabase } from "@/src/server/supabase/supabaseClient";
 import { api } from "@/src/utils/api";
 import { MoveLeft } from "lucide-react";
 import { getSession, useSession } from "next-auth/react";
+import type { GetSessionParams } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { calculateNextWater } from "@/src/utils/dates";
 import { toast } from "@/src/components/ui/use-toast";
-
-interface PlantPage {}
 
 interface Image {
   name: string;
@@ -25,7 +24,7 @@ interface Image {
   updated_at: string;
 }
 
-const PlantPage = ({}: PlantPage) => {
+const PlantPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const { data: session } = useSession();
@@ -58,7 +57,7 @@ const PlantPage = ({}: PlantPage) => {
   const getImages = async () => {
     const { data, error } = await supabase.storage
       .from("plants")
-      .list(`${userId}/${id}`);
+      .list(`${(userId as string) || "default"}/${id}`);
 
     if (data) {
       setImages(data);
@@ -68,15 +67,14 @@ const PlantPage = ({}: PlantPage) => {
     }
   };
 
-  const waterPlant = () => {
+  const waterPlant = async () => {
     const now = new Date();
     updateLastWatered.mutate({ lastWatered: now, plantId: id as string });
+    await plantData.refetch();
     toast({
       title: "Plant watered",
       description: "You have watered your plant, Great job!",
     });
-
-    plantData.refetch();
   };
 
   if (
@@ -116,7 +114,7 @@ const PlantPage = ({}: PlantPage) => {
             <p> {plantData.data?.notes} </p>
           </div>
 
-          <div className="mb-5 flex flex-col space-y-4">
+          <div className="mb-5 flex flex-col space-y-3">
             <h3 className="text-md font-semibold md:text-2xl">Photo Log</h3>
             <p className="md:text-md text-sm">
               Upload photos of your plant progress
@@ -160,7 +158,7 @@ const PlantPage = ({}: PlantPage) => {
 };
 export default PlantPage;
 
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps(context: GetSessionParams) {
   const session = await getSession(context);
 
   if (!session) {

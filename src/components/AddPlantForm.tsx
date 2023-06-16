@@ -32,7 +32,7 @@ const AddPlantForm = () => {
   const { data } = useSession();
   const { toast } = useToast();
   const addPlant = api.plant.addPlant.useMutation();
-  const userId = data?.user.id!;
+  const userId = data?.user.id as string;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -87,7 +87,7 @@ const AddPlantForm = () => {
                 <Input placeholder="Scientific Plant Name" {...field} />
               </FormControl>
               <FormDescription>
-                This is your plant's scientific plant name.
+                This is your plant&apos;s scientific plant name.
               </FormDescription>
               <FormMessage />
             </FormItem>
