@@ -87,7 +87,7 @@ const AddPlantForm = () => {
                 <Input placeholder="Scientific Plant Name" {...field} />
               </FormControl>
               <FormDescription>
-                This is your plant&apos;s scientific plant name.
+                This is your plant&apos;s scientific name.
               </FormDescription>
               <FormMessage />
             </FormItem>

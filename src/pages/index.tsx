@@ -55,6 +55,7 @@ const Home: NextPage = () => {
                   fill
                   sizes="(max-width: 960px) 100vw, 960px"
                   className="h-auto w-full"
+                  unoptimized
                 />
               </div>
               <h2 className="mx-5 my-10 text-center text-3xl font-bold">

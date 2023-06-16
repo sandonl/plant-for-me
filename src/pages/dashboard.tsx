@@ -35,8 +35,7 @@ const Dashboard: NextPage = () => {
                   {allPlants.data?.length === 0 ? (
                     <>
                       <h2 className="mb-5 text-center font-semibold">
-                        You don`&apos;`t currently have any plants, add one
-                        below
+                        You don&apos;t currently have any plants, add one below
                       </h2>
                       <div className="flex justify-end py-2">
                         <Button asChild>
