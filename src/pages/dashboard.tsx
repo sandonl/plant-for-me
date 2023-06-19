@@ -68,20 +68,3 @@ const Dashboard: NextPage = () => {
   );
 };
 export default Dashboard;
-
-export async function getServerSideProps(context: GetSessionParams) {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { session },
-  };
-}
