@@ -154,11 +154,8 @@ const PlantPage = () => {
             </div>
           </div>
           <div className="mb-10 h-10 w-10"></div>
-
-          <Button asChild variant="outline">
-            <Link href={"/dashboard"}>
-              <MoveLeft />
-            </Link>
+          <Button variant="outline" onClick={() => router.back()}>
+            <MoveLeft />
           </Button>
         </div>
       </Layout>

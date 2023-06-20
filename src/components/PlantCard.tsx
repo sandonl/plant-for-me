@@ -28,7 +28,7 @@ const PlantCard = (props: PlantCardProps) => {
 
   return (
     <Link href={{ pathname: `plants/${id}` }}>
-      <Card className="mb-2 cursor-pointer">
+      <Card className="mb-2 cursor-pointer transition-transform hover:scale-105 hover:bg-slate-50">
         <CardHeader>
           <CardTitle>{name}</CardTitle>
           <CardDescription>{plantName}</CardDescription>
