@@ -1,12 +1,11 @@
-import type { GetSessionParams } from "next-auth/react";
-import { getSession, useSession } from "next-auth/react";
+import type { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import PlantCard from "../components/PlantCard";
+import PlantCardSkeleton from "../components/PlantCardSkeleton";
 import { Button } from "../components/ui/button";
 import { api } from "../utils/api";
-import type { NextPage } from "next";
-import PlantCardSkeleton from "../components/PlantCardSkeleton";
 
 const Dashboard: NextPage = () => {
   const { data: session } = useSession({
@@ -22,7 +21,11 @@ const Dashboard: NextPage = () => {
       <Layout pageTitle="Dashboard">
         <div className="flex min-w-full flex-col">
           <h1 className="my-3 text-center text-sm font-bold md:text-2xl">
-            Welcome {session?.user.name}!
+            {session ? (
+              <> Welcome {session?.user.name}! </>
+            ) : (
+              <div className="h-5" />
+            )}
           </h1>
           <>
             <div className="mx-auto w-96 max-w-4xl md:w-full">
