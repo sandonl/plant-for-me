@@ -1,18 +1,29 @@
 import { type NextPage } from "next";
 import { signIn, useSession } from "next-auth/react";
-import Layout from "../components/Layout";
-import Footer from "../components/Footer";
-import { Button } from "../components/ui/button";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import Footer from "../components/Footer";
+import Layout from "../components/Layout";
+import { Button } from "../components/ui/button";
+import { useRef } from "react";
 
 const Home: NextPage = () => {
   const { status } = useSession();
 
+  const targetRef = useRef<HTMLDivElement>(null);
+
+  const scrollToLearnMore = () => {
+    if (targetRef.current) {
+      targetRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <>
       <Layout pageTitle={"Home"}>
-        <div className="bg-gradient-to-t from-slate-100 to-green-100">
+        <div className="bg-gradient-to-b from-slate-100 to-green-100">
           <div className="mx-auto max-w-5xl">
             <main className="flex h-[calc(100vh-4rem)] flex-col items-center justify-center">
               <h1 className="text-6xl font-bold text-slate-900">
@@ -32,22 +43,32 @@ const Home: NextPage = () => {
               </h3>
               <div className="p-2" />
 
-              {status === "authenticated" ? (
-                <Button className="px-10 py-6 text-xl" asChild>
-                  <Link href="/dashboard"> Go to Dashboard </Link>
-                </Button>
-              ) : (
+              <div className="flex space-x-4">
+                {status === "authenticated" ? (
+                  <Button className="px-10 py-6 text-xl" asChild>
+                    <Link href="/dashboard"> Go to Dashboard </Link>
+                  </Button>
+                ) : (
+                  <Button
+                    className="px-10 py-6 text-xl"
+                    onClick={() =>
+                      void signIn("discord", { callbackUrl: "/dashboard" })
+                    }
+                  >
+                    Get Started
+                  </Button>
+                )}
                 <Button
-                  className="px-10 py-6 text-xl"
-                  onClick={() =>
-                    void signIn("discord", { callbackUrl: "/dashboard" })
-                  }
+                  className="px-10 py-6 text-xl hover:border-black"
+                  variant={"outline"}
+                  onClick={scrollToLearnMore}
                 >
-                  Get Started
+                  Learn More
                 </Button>
-              )}
+              </div>
             </main>
-            <div className="h-screen">
+            <div className="h-screen " ref={targetRef}>
+              <div className="p-32" />
               <div className="relative aspect-video w-full">
                 <Image
                   src="/hero/hero.png"
@@ -64,6 +85,7 @@ const Home: NextPage = () => {
               <h2 className="mx-5 my-10 text-center text-3xl font-bold">
                 Keep photos of your plant progress
               </h2>
+              <div className="p-32" />
             </div>
           </div>
         </div>
