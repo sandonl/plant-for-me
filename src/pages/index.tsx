@@ -67,8 +67,10 @@ const Home: NextPage = () => {
                 </Button>
               </div>
             </main>
-            <div className="h-screen " ref={targetRef}>
-              <div className="p-32" />
+            <div
+              className="flex h-screen flex-col items-center justify-center"
+              ref={targetRef}
+            >
               <div className="relative aspect-video w-full">
                 <Image
                   src="/hero/hero.png"
@@ -79,13 +81,15 @@ const Home: NextPage = () => {
                   unoptimized
                 />
               </div>
-              <h2 className="mx-5 my-10 text-center text-3xl font-bold">
+              <div className="py-5" />
+              <h2 className="text-center text-3xl font-bold">
                 Keep track of information relevant to each plant
               </h2>
-              <h2 className="mx-5 my-10 text-center text-3xl font-bold">
+              <div className="py-5" />
+              <h2 className="text-center text-3xl font-bold">
                 Keep photos of your plant progress
               </h2>
-              <div className="p-32" />
+              <div className="py-32" />
             </div>
           </div>
         </div>

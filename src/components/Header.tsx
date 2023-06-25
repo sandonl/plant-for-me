@@ -6,8 +6,8 @@ const Header = () => {
   const { status } = useSession();
 
   return (
-    <header className="sticky top-0 z-40 box-border w-full border-b border-b-slate-200 bg-slate-100">
-      <div className="mx-auto max-w-6xl">
+    <header className="sticky top-0 z-40 box-border w-full border-b border-b-slate-200 bg-slate-100 ">
+      <div className="mx-auto max-w-6xl px-4">
         <div className="flex h-16 items-center justify-between space-x-1">
           <Link href={"/"}>
             <h2 className="text-2xl font-bold hover:text-slate-600">
