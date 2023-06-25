@@ -67,16 +67,13 @@ const Home: NextPage = () => {
                 </Button>
               </div>
             </main>
-            <div
-              className="flex h-screen flex-col items-center justify-center"
-              ref={targetRef}
-            >
+            <div className="flex h-screen flex-col" ref={targetRef}>
               <div className="relative aspect-video w-full">
                 <Image
                   src="/hero/hero.png"
                   alt={""}
                   fill
-                  sizes="(max-width: 960px) 100vw, 960px"
+                  sizes="(max-width: 768px) 100vw, 768px"
                   className="h-auto w-full"
                   unoptimized
                 />
@@ -89,7 +86,7 @@ const Home: NextPage = () => {
               <h2 className="text-center text-3xl font-bold">
                 Keep photos of your plant progress
               </h2>
-              <div className="py-32" />
+              <div className="py-5" />
             </div>
           </div>
         </div>
